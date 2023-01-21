@@ -2,6 +2,10 @@ const grids = document.querySelectorAll('.grid');
 const resultDisplay = document.querySelector('#result');
 const restartBtn = document.querySelector('#restart');
 const setNameBtn = document.querySelector('#setname-btn');
+const firstName = document.querySelector('#firstName');
+const secondName = document.querySelector('#secondName');
+const deleteInput= document.querySelector('#delete-input');
+const editInput = document.querySelector('#edit-input');
 
 const Player = (symbol) => {
     
@@ -9,6 +13,8 @@ const Player = (symbol) => {
     const setName = name => {
         if (name != ""){
             _name = name;
+        } else {
+            _name = symbol;
         }
     }
     const getName = () => _name;
@@ -132,7 +138,13 @@ const displayController = (() => {
             resultDisplay.textContent = result;
         }
     }
-    return {displayResult}
+    const clearInput = () => {
+        if(!firstName.hasAttribute('disabled')) {
+            firstName.value = "";
+            secondName.value = "";
+        }
+    }
+    return {displayResult, clearInput}
 })();
 
 
@@ -168,12 +180,18 @@ restartBtn.addEventListener('click', () => {
 
 setNameBtn.addEventListener('click', e => {
     e.preventDefault();
-    const firstName = document.querySelector('#firstName');
-    const secondName = document.querySelector('#secondName');
+
     player_o.setName(firstName.value);
     player_x.setName(secondName.value);
+    firstName.setAttribute('disabled', "");
+    secondName.setAttribute('disabled', "");
+});
 
-})
+deleteInput.addEventListener('click', displayController.clearInput);
+editInput.addEventListener('click', () => {
+    firstName.removeAttribute('disabled');
+    secondName.removeAttribute('disabled');
+});
 
 
 // Creating two players

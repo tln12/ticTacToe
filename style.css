@@ -50,7 +50,7 @@ form {
     font-size: var(--text-font-size);
 }
 
-#start-btn{
+#setname-btn{
     background-color: var(--theme-color);
     color: var(--side-color);
     font-size: var(--text-font-size);

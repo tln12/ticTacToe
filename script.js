@@ -1,11 +1,23 @@
 const grids = document.querySelectorAll('.grid');
 const resultDisplay = document.querySelector('#result');
 const restartBtn = document.querySelector('#restart');
+const setNameBtn = document.querySelector('#setname-btn');
 
 const Player = (symbol) => {
     
+    let _name = symbol;
+    const setName = name => {
+        if (name != ""){
+            _name = name;
+        }
+    }
+    const getName = () => _name;
     
-    return {symbol}
+    return {
+        symbol,
+        setName,
+        getName
+    }
 }
 
 const gameBoard = (() => {
@@ -89,11 +101,14 @@ const gameBoard = (() => {
         if (_isFull()){
             return 'Game ends in a tie.'
         } else if (rowWin){
-            return `Player ${rowWin} wins.`;
+            let winName = players[rowWin].getName();
+            return `${winName} wins.`;
         } else if (columnWin){
-            return `Player ${columnWin} wins.`;
+            let winName = players[columnWin].getName();
+            return `${winName} wins.`;
         } else if (diagWin) {
-            return `Player ${diagWin} wins.`;
+            let winName = players[diagWin].getName();
+            return `${winName} wins.`;
         } else {
             return false;
         }
@@ -117,8 +132,6 @@ const displayController = (() => {
             resultDisplay.textContent = result;
         }
     }
-
-
     return {displayResult}
 })();
 
@@ -153,11 +166,23 @@ restartBtn.addEventListener('click', () => {
 }
 );
 
+setNameBtn.addEventListener('click', e => {
+    e.preventDefault();
+    const firstName = document.querySelector('#firstName');
+    const secondName = document.querySelector('#secondName');
+    player_o.setName(firstName.value);
+    player_x.setName(secondName.value);
 
-gameBoard.displayBoard();
+})
 
+
+// Creating two players
 const player_o = Player('o');
 const player_x = Player('x');
+let players = {
+    x : player_x,
+    o : player_o
+}
 
 gameBoard.setLastPlayer(player_o);
 

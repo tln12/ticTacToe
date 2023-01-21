@@ -1,6 +1,9 @@
 const grids = document.querySelectorAll('.grid');
+const resultDisplay = document.querySelector('#result');
+const restartBtn = document.querySelector('#restart');
 
 const Player = (symbol) => {
+    
     
     return {symbol}
 }
@@ -22,15 +25,19 @@ const gameBoard = (() => {
             i++;
         });
     }
-    const getMarkList = () => _markList;
     const addMark = (symbol, index) => {
         _markList[index] = symbol;
     }
     const isMarked = index => {
         return _markList[index] == " " ? false : true;
     }
-    const isFull = () => {
+    const _isFull = () => {
         return _markList.includes(" ") ? false : true;
+    }
+
+    const clearBoard = () => {
+        _markList = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+        displayBoard();
     }
 
     /*  Check winning positions:
@@ -79,7 +86,7 @@ const gameBoard = (() => {
         let columnWin = _checkColumnWin();
         let diagWin = _checkDiagWin();
         
-        if (gameBoard.isFull()){
+        if (_isFull()){
             return 'Game ends in a tie.'
         } else if (rowWin){
             return `Player ${rowWin} wins.`;
@@ -98,22 +105,28 @@ const gameBoard = (() => {
         getLastPlayer,
         isMarked,
         addMark,
-        isFull,
-        getMarkList,
+        clearBoard,
         gameOver
     }
     
 })();
 
 const displayController = (() => {
-    
+    const displayResult = result => {
+        if (result) {
+            resultDisplay.textContent = result;
+        }
+    }
+
+
+    return {displayResult}
 })();
 
 
 grids.forEach(grid => grid.addEventListener('click', () => {
 
     let index = Array.prototype.indexOf.call(grids, grid);
-    if (!gameBoard.isMarked(index)){
+    if (!gameBoard.isMarked(index) && !gameBoard.gameOver()){
         switch (gameBoard.getLastPlayer().symbol) {
             case 'o': 
                 gameBoard.addMark('x', index); 
@@ -125,10 +138,21 @@ grids.forEach(grid => grid.addEventListener('click', () => {
                 break;
         };
         gameBoard.displayBoard();
-        console.log(gameBoard.gameOver());
+        if (gameBoard.gameOver()){
+            displayController.displayResult(gameBoard.gameOver());
+            restartBtn.style.display = 'block';
+        }
     }
     
 }));
+
+restartBtn.addEventListener('click', () => {
+    gameBoard.clearBoard();
+    restartBtn.style.display = 'none';
+    result.textContent = "";
+}
+);
+
 
 gameBoard.displayBoard();
 

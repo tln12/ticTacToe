@@ -1,19 +1,107 @@
+:root {
+    font-family: 'Nunito', sans-serif;
+    --theme-color: #505062;
+    --side-color: #F4F4F4;
+    --text-font-size: 1rem;
+}
+
+body {
+    color: var(--theme-color);
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1{
+    display: flex;
+    background-color: var(--theme-color);
+    color: var(--side-color);
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 10vh;
+}
+
+form {
+    background-color: var(--side-color);
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 80px;
+    
+}
+
+.form-input {
+    display: flex;
+    gap: 10px;
+}
+.form-input input {
+    font-size: var(--text-font-size);
+}
+
+#start-btn{
+    background-color: var(--theme-color);
+    color: var(--side-color);
+    font-size: var(--text-font-size);
+    height: 50px;
+    width: 120px;
+    border: none;
+    border-radius: 8px;
+}
+
 .gameboard {
     box-sizing: border-box;
-    width: 300px;
-    height: 300px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
 
 .grid {
+    width: 100px;
+    height: 100px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border: 3px solid var(--theme-color);
+    font-size: 2rem;
+}
+
+#result {
+    font-size: var(--text-font-size);
 }
 
 #restart {
     display: none;
+    background-color: var(--theme-color);
+    color: var(--side-color);
+    height: 50px;
+    width: 140px;
+    border: none;
+    border-radius: 8px;
+    font-size: var(--text-font-size);
+
+}
+
+footer {
+    display: flex;
+    content: ' ';
+    justify-content: center;
+    align-items: center;
+    background-color: #373737;
+    height: 60px;
+    width: 100vw;
+    padding: 10px;
+    color: white;
+    font-size: var(--text-font-size);
 }

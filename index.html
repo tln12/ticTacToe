@@ -4,11 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
+    <header>
+        <h1>Tic Tac Toe</h1>
+        <form action="">
+            <div class="form-input">
+                <label for="firstName">
+                    <input type="text" id="firstName" name="firstName" placeholder="Enter name">
+                </label>
+                <span>vs.</span>
+                <label for="secondName">
+                    <input type="text" id="secondName" name="secondName" placeholder="Enter name">
+                </label>
+            </div>
+            <button id="start-btn">Start</button>
+        </form>
+    </header>
+
     <div class="gameboard">
         <div class="grid"></div>
         <div class="grid"></div>
@@ -20,7 +39,11 @@
         <div class="grid"></div>
         <div class="grid"></div>
     </div>
+
     <div id="result"></div>
     <button id="restart">Restart game</button>
+
+
+    <footer>Copyright &#169; Thanh Le Nguyen</footer>
 </body>
 </html>
